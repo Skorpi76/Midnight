@@ -10,6 +10,7 @@ public class PlayerInput : MonoBehaviour
     private Rigidbody2D rb;
     private Camera playerCamera;
 
+
     private Vector2 playerToMouse;
     private float angle;
     // ===================================
@@ -19,6 +20,8 @@ public class PlayerInput : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         input = Vector3.zero;
         playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+  
+            
 
     }
 
