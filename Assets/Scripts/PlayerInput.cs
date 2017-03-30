@@ -1,0 +1,78 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerInput : MonoBehaviour
+{
+    private int speed;
+    public bool androidInput;
+    private Vector3 input;
+    private Rigidbody2D rb;
+    private Camera playerCamera;
+
+    private Vector2 playerToMouse;
+    private float angle;
+    // ===================================
+    void Start()
+    {
+        speed = 5;
+        rb = GetComponent<Rigidbody2D>();
+        input = Vector3.zero;
+        playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+
+    }
+
+    // ===================================
+    void Update()
+    {
+        input.Set(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
+#if UNITY_ANDROID
+
+#else
+
+#endif
+        if (androidInput)
+        {
+            if (input != Vector3.zero)
+            {
+                if (input.y != 0)
+                {
+                    if (input.y > 0)
+                    {
+                        transform.rotation = Quaternion.identity;
+                    }
+                    else if (input.y < 0)
+                    {
+                        transform.rotation = Quaternion.Euler(0, 0, 180);
+                    }
+                }
+                else if (input.x != 0)
+                {
+                    if (input.x > 0)
+                    {
+                        transform.rotation = Quaternion.Euler(0, 0, 270);
+                    }
+                    else if (input.x < 0)
+                    {
+                        transform.rotation = Quaternion.Euler(0, 0, 90);
+                    }
+                }
+
+            }
+        }
+        else
+        {
+            playerToMouse = transform.position - playerCamera.ScreenToWorldPoint(Input.mousePosition);
+            angle = (Mathf.Atan2(playerToMouse.y, playerToMouse.x) * Mathf.Rad2Deg) + 90;
+            transform.rotation = Quaternion.Euler(0, 0, angle);
+        }
+
+
+    }
+
+    // ===================================
+    void FixedUpdate()
+    {
+        rb.velocity = input * speed;
+    }
+}
