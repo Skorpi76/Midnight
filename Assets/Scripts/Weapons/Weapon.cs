@@ -23,7 +23,12 @@ public abstract class Weapon : MonoBehaviour
         else if (Input.GetButton("Fire1"))
         {
             time = 0;
-            Shoot();
+            if (currentAmmunition > 0)
+            {
+                Shoot();
+                currentAmmunition--;
+            }
+   
         }
     }
     protected abstract void Shoot();

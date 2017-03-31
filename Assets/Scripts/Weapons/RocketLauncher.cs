@@ -12,7 +12,7 @@ public class RocketLauncher : Weapon
         maxAmmunition = 5;
         currentAmmunition = maxAmmunition;
 
-        coolDownTime = .2f;
+        coolDownTime = .7f;
         time = coolDownTime;
     }
 
