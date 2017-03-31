@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Bluster : Weapon {
-    public GameObject blusterPRFB;
+   
     // ===================================
     void Start()
     {
@@ -12,12 +12,10 @@ public class Bluster : Weapon {
 
         coolDownTime = .1f;
         time = coolDownTime;
+        damage = -20;
     }
 
     // ===================================
-    protected override void Shoot()
-    {
-        Instantiate(blusterPRFB, shootPoint.position, shootPoint.rotation);
-    }
+ 
 
 }

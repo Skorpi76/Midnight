@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class BlasterBullet : Projectile
 {
-  
-    void OnCollisionEnter2D(Collision2D other)
+    protected override void OnCollision(GameObject obj)
     {
-        Destroy(this.gameObject);
+        base.OnCollision(obj);
     }
+
 }

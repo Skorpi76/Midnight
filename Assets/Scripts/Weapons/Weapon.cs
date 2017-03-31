@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Weapon : MonoBehaviour
+public class Weapon : MonoBehaviour
 {
     public Transform shootPoint;
+    public GameObject projectilePRFB;
     protected int currentAmmunition;
     protected int maxAmmunition;
     protected float time;
     protected float coolDownTime;
+    protected int damage;
 
 
 
@@ -31,5 +33,13 @@ public abstract class Weapon : MonoBehaviour
    
         }
     }
-    protected abstract void Shoot();
+    protected virtual void Shoot()
+    {
+        GameObject projectile =  Instantiate(projectilePRFB, shootPoint.position, shootPoint.rotation) as GameObject;
+        projectile.GetComponent<Projectile>().SetWeapon(this);
+    }
+    public virtual void OnHit(Entity obj)
+    {
+        obj.ModifyHealth(damage);
+    }
 }

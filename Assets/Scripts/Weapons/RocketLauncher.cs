@@ -5,7 +5,7 @@ using UnityEngine;
          
 public class RocketLauncher : Weapon
 {
-    public GameObject rocketPRFB;
+    
     // ===================================
     void Start()
     {
@@ -14,11 +14,11 @@ public class RocketLauncher : Weapon
 
         coolDownTime = .7f;
         time = coolDownTime;
+        damage = -50;
     }
 
     // ===================================
-    protected override void Shoot()
-    {
-        Instantiate(rocketPRFB, shootPoint.position, shootPoint.rotation);
-    }
+
+
+   
 }
