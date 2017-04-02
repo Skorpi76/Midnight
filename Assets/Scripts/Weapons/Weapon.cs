@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    public Sprite weaponIcon;
     public Transform shootPoint;
     public GameObject projectilePRFB;
     protected int currentAmmunition;
@@ -13,7 +14,14 @@ public class Weapon : MonoBehaviour
     protected int damage;
 
 
-
+    void OnEnable() {
+        if (GameManager.current != null)
+        {
+            GameManager.current.weaponIcon.sprite = this.weaponIcon;
+            GameManager.current.weponAmmo.text = this.currentAmmunition + "/" + this.maxAmmunition;
+        }
+     
+    }
 
     void Update()
     {
@@ -29,6 +37,7 @@ public class Weapon : MonoBehaviour
             {
                 Shoot();
                 currentAmmunition--;
+                GameManager.current.weponAmmo.text = this.currentAmmunition + "/" + this.maxAmmunition;
             }
    
         }

@@ -15,6 +15,9 @@ public class RocketLauncher : Weapon
         coolDownTime = .7f;
         time = coolDownTime;
         damage = -50;
+
+        GameManager.current.weaponIcon.sprite = this.weaponIcon;
+        GameManager.current.weponAmmo.text = this.currentAmmunition + "/" + this.maxAmmunition;
     }
 
     // ===================================

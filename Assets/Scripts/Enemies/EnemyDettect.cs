@@ -14,12 +14,19 @@ public class EnemyDettect : MonoBehaviour {
     // ===================================
     void OnTriggerEnter2D(Collider2D player)
     {
-        enemyMove.IsPlayerNear(true);
+        if (player.gameObject.CompareTag("Player"))
+        {
+            enemyMove.IsPlayerNear(true);
+
+        }     
     }
 
     // ===================================
     void OnTriggerExit2D(Collider2D player)
     {
-        enemyMove.IsPlayerNear(false);
+        if (player.gameObject.CompareTag("Player"))
+        {
+            enemyMove.IsPlayerNear(false);
+        }
     }
 }

@@ -13,6 +13,8 @@ public class Bluster : Weapon {
         coolDownTime = .1f;
         time = coolDownTime;
         damage = -20;
+        GameManager.current.weaponIcon.sprite = this.weaponIcon;
+        GameManager.current.weponAmmo.text = this.currentAmmunition + "/" + this.maxAmmunition;
     }
 
     // ===================================
