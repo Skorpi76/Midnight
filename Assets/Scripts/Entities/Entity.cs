@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour {
     public int maxHealth;
-    private int health;
+    protected int health;
 
 	// Use this for initialization
 	void Start () {
         health = maxHealth;	
 	}
 
-    public void ModifyHealth(int amount)
+    public virtual void ModifyHealth(int amount)
     {
        
         health += amount;
