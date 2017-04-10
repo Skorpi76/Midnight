@@ -5,10 +5,12 @@ using UnityEngine;
 public class HealthPack : MonoBehaviour {
     public int amount; 
     private GameObject player;
-
+    private AudioSource grabHealthSound;
+ 
     public void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        grabHealthSound = GetComponent<AudioSource>();
     }
 
     public void OnTriggerEnter2D(Collider2D collider)
@@ -23,9 +25,15 @@ public class HealthPack : MonoBehaviour {
             else
             {
                 player.GetComponent<Entity>().ModifyHealth(amount);
-                Destroy(this.gameObject);
+                grabHealthSound.Play();
+                StartCoroutine(WaitForSoundAndDestroy());
             }
        
         }
+    }
+    IEnumerator WaitForSoundAndDestroy()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Destroy(this.gameObject);
     }
 }

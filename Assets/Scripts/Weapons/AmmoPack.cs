@@ -5,6 +5,11 @@ using UnityEngine;
 public class AmmoPack : MonoBehaviour {
     public Weapon.AmmoType ammoType;
     public int amount;
+    private AudioSource grabAmmoSound;
+    void Start()
+    {
+        grabAmmoSound = GetComponent<AudioSource>();
+    }
     public void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.gameObject.name == "Player")
@@ -13,10 +18,17 @@ public class AmmoPack : MonoBehaviour {
 
             if (wm.AddAmmo(this.ammoType, this.amount))
             {
-                Destroy(this.gameObject);
+                grabAmmoSound.Play();
+                StartCoroutine(WaitForSoundAndDestroy());
+              
             }
         }
        
+    }
+    IEnumerator WaitForSoundAndDestroy()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Destroy(this.gameObject);
     }
 }
 
