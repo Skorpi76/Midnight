@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour {
     public int maxHealth;
-    protected int health;
+    public int health;
 
 	// Use this for initialization
 	void Start () {

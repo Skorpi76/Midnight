@@ -46,4 +46,25 @@ public class WeaponManager : MonoBehaviour
         }
         weapons[actualWeapon].gameObject.SetActive(true);
     }
+    public bool AddAmmo(Weapon.AmmoType type, int amount)
+    {
+        Weapon tmp = null;
+        for (int i = 0; i < weapons.Length; i++)
+        {
+            if (weapons[i].ammotype == type)
+            {
+                tmp = weapons[i];
+                i = weapons.Length;
+            }
+        }
+        if (tmp != null)
+        {
+            return tmp.AddAmmo(amount);
+        }
+        else
+        {
+            return false;
+        }
+       
+    }
 }

@@ -12,6 +12,8 @@ public class Weapon : MonoBehaviour
     protected float time;
     protected float coolDownTime;
     protected int damage;
+    public enum AmmoType {BLASTER, ROCKET}
+    public AmmoType ammotype;
 
 
     void OnEnable() {
@@ -51,4 +53,23 @@ public class Weapon : MonoBehaviour
     {
         obj.ModifyHealth(damage);
     }
+
+    public bool AddAmmo(int amount)
+    {
+        if (maxAmmunition == this.currentAmmunition)
+        {
+            return false;
+        }
+        else
+        {
+            currentAmmunition += amount;
+            if (currentAmmunition > maxAmmunition)
+            {
+                this.currentAmmunition = this.maxAmmunition;
+            }
+            GameManager.current.weponAmmo.text = this.currentAmmunition + "/" + this.maxAmmunition;
+            return true;
+        }
+    }
+
 }
