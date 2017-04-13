@@ -5,9 +5,10 @@ using UnityEngine;
 public class Entity : MonoBehaviour {
     public int maxHealth;
     public int health;
+    public GameObject blood;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         health = maxHealth;	
 	}
 
@@ -28,6 +29,10 @@ public class Entity : MonoBehaviour {
     public virtual void OnDeath()
     {
         Destroy(this.gameObject);
+        if (blood != null)
+        {
+            Instantiate(blood,(new Vector3(transform.position.x, transform.position.y, 0f)), Quaternion.identity);
+        }
     }
 
 }

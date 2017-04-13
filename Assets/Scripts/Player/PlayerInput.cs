@@ -5,10 +5,14 @@ using UnityEngine;
 public class PlayerInput : MonoBehaviour
 {
     private int speed;
-  //  public bool androidInput;
+    //  public bool androidInput;
     private Vector3 input;
     private Rigidbody2D rb;
     private Camera playerCamera;
+
+    bool isMoving;
+
+    Animator anim;
 
 
     private Vector2 playerToMouse;
@@ -20,23 +24,32 @@ public class PlayerInput : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         input = Vector3.zero;
         playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-  
-            
+
+        anim = GetComponent<Animator>();
 
     }
 
     // ===================================
     void Update()
     {
-        input.Set(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
-        
        
+
+       
+
+            input.Set(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
             playerToMouse = transform.position - playerCamera.ScreenToWorldPoint(Input.mousePosition);
             angle = (Mathf.Atan2(playerToMouse.y, playerToMouse.x) * Mathf.Rad2Deg) + 90;
             transform.rotation = Quaternion.Euler(0, 0, angle);
-        
-
-
+      
+        float inputLength = Vector2.Distance(Vector2.zero, new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")));
+        if (inputLength > 0)
+        {
+            isMoving = true;
+        }
+        else {
+            isMoving = false; 
+        }
+        anim.SetBool("isMoving", isMoving);
     }
 
     // ===================================
