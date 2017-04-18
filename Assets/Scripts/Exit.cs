@@ -11,7 +11,8 @@ public class Exit : MonoBehaviour {
     {
         if (keyActive)
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene("GameOver");
+            keyActive = false;
         }
     }
 }
