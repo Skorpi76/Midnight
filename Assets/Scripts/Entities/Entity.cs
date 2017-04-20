@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Entity : MonoBehaviour {
     public int maxHealth;
@@ -31,7 +32,13 @@ public class Entity : MonoBehaviour {
         Destroy(this.gameObject);
         if (blood != null)
         {
-            Instantiate(blood,(new Vector3(transform.position.x, transform.position.y, 0f)), Quaternion.identity);
+            Instantiate(blood, (new Vector3(transform.position.x, transform.position.y, 0f)), Quaternion.identity);
+        }
+
+        if (gameObject.name == "Player")
+        {
+            SceneManager.LoadScene("GameOver");
+            Exit.keyActive = false;
         }
     }
 
